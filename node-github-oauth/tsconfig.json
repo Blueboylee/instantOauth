@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "../instant-Oauth/dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
+  "include": ["../instant-Oauth/src"],
+  "exclude": ["../instant-Oauth/node_modules", "../instant-Oauth/dist", "../instant-Oauth/**/*.test.ts"]
+}
