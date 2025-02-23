@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GitHubOAuthContextType, GitHubOAuthProviderProps } from './types';
 
 const GitHubOAuthContext = createContext<GitHubOAuthContextType | null>(null);
@@ -7,6 +8,7 @@ export const GitHubOAuthProvider: React.FC<GitHubOAuthProviderProps> = ({ config
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<any | null>(null);
+  const navigate = useNavigate();
 
   const handleCallback = async (code: string) => {
     try {
@@ -19,6 +21,7 @@ export const GitHubOAuthProvider: React.FC<GitHubOAuthProviderProps> = ({ config
         setUser(data.user);
         localStorage.setItem('auth_token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
+        navigate('/');
       }
     } catch (error) {
       console.error('GitHub认证失败:', error);
