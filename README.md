@@ -13,7 +13,7 @@ React 组件库，提供简单易用的 GitHub OAuth 登录功能。详细信息
 
 ### node-github-oauth
 
-Node.js 后端库，用于处理 GitHub OAuth 认证流程。
+Node.js 后端库，用于处理 GitHub OAuth 认证流程。(还未完成)
 
 ## 开发说明
 

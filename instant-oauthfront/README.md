@@ -5,10 +5,10 @@
 ## 安装
 
 ```bash
-npm install @blog-app/react-github-oauth
+npm install react-github-oauth
 
 # 或者使用yarn
-yarn add @blog-app/react-github-oauth
+yarn add react-github-oauth
 ```
 
 ## 使用方法
@@ -16,7 +16,7 @@ yarn add @blog-app/react-github-oauth
 1. 在应用根组件中配置GitHubOAuthProvider：
 
 ```jsx
-import { GitHubOAuthProvider } from '@blog-app/react-github-oauth';
+import { GitHubOAuthProvider } from 'react-github-oauth';
 
 const githubOAuthConfig = {
   clientId: 'your-github-client-id',
@@ -40,7 +40,7 @@ function App() {
 2. 在需要GitHub登录的组件中使用GitHubLoginButton：
 
 ```jsx
-import { GitHubLoginButton } from '@blog-app/react-github-oauth';
+import { GitHubLoginButton } from 'react-github-oauth';
 
 function LoginPage() {
   return (
@@ -86,6 +86,60 @@ import { GitHubCallback } from 'react-github-oauth';
 | 参数 | 类型 | 必填 | 说明 |
 |------|------|------|------|
 | className | string | 否 | 自定义样式类名 |
+
+# 具体的例子
+### 在路由界面
+```
+import { GitHubOAuthProvider, GitHubCallback } from 'instant-oauthfront';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Login from './components/Login';
+
+// GitHub OAuth 配置
+const githubOAuthConfig = {
+  clientId: import.meta.env.VITE_GITHUB_CLIENT_ID,
+  redirectUrl: 'http://localhost:5173/github/callback',
+  apiBaseUrl: 'http://localhost:3000', // 后端 API 地址
+};
+
+function App() {
+  return (
+    <Router>
+      <GitHubOAuthProvider config={githubOAuthConfig}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/github/callback" element={<GitHubCallback />} />
+        </Routes>
+      </GitHubOAuthProvider>
+    </Router>
+  );
+}
+
+export default App;
+
+```
+### 登录界面
+login.tsx中
+```
+import { Button } from '@mui/material';
+import { useGitHubOAuth } from 'instant-oauthfront';
+
+const Login = () => {
+  const { login, isLoading } = useGitHubOAuth();
+
+  // 点击按钮触发 GitHub OAuth 登录
+  //放在你想展示github登录的地方
+  return (
+    <Button variant="contained" onClick={login} disabled={isLoading}>
+      使用 GitHub 登录
+    </Button>
+  );
+};
+
+export default Login;
+
+```
 
 ## 许可证
 
