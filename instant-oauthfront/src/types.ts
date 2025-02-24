@@ -1,3 +1,4 @@
+import { NavigateFunction } from 'react-router-dom';
 export interface GitHubOAuthConfig {
   clientId: string;
   redirectUrl: string;
@@ -18,6 +19,7 @@ export interface GitHubOAuthContextType {
 export interface GitHubOAuthProviderProps {
   config: GitHubOAuthConfig;
   children: React.ReactNode;
+  navigate: NavigateFunction;
 }
 
 export interface GitHubLoginButtonProps {

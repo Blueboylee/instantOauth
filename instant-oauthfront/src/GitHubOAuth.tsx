@@ -13,12 +13,20 @@ const StyledGitHubButton = styled(Button)(({ theme }) => ({
 
 export const GitHubLoginButton = ({ className }: GitHubLoginButtonProps) => {
   const { login, isLoading } = useGitHubOAuth();
+  
+  const handleClick = () => {
+    console.log('GitHub登录按钮被点击');
+    login();
+  };
+
+  console.log('GitHubLoginButton渲染，当前状态:', { isLoading });
+
   return (
     <StyledGitHubButton
       fullWidth
       variant="outlined"
       startIcon={<GitHubIcon />}
-      onClick={login}
+      onClick={handleClick}
       disabled={isLoading}
       className={className}
     >
