@@ -21,8 +21,11 @@ import { GitHubOAuthProvider } from '@blog-app/react-github-oauth';
 const githubOAuthConfig = {
   clientId: 'your-github-client-id',
   clientSecret: 'your-github-client-secret',
-  redirectUrl: 'http://your-domain/github/callback',
-  apiBaseUrl: 'http://your-api-domain'
+  redirectUrl: 'http://your-domain/github/callback', 
+  apiBaseUrl: 'http://your-api-domain',
+  authUrl: 'https://github.com/login/oauth/authorize',  // 可选，GitHub认证URL
+  callbackPath: '/api/auth/github/callback',  // 可选，后端回调接口路径
+  scope: 'user:email'  // 可选，OAuth权限范围
 };
 
 function App() {
@@ -51,7 +54,7 @@ function LoginPage() {
 3. 添加回调页面组件：
 
 ```jsx
-import { GitHubCallback } from '@blog-app/react-github-oauth';
+import { GitHubCallback } from 'react-github-oauth';
 
 // 在路由中添加
 <Route path="/github/callback" element={<GitHubCallback />} />
@@ -61,15 +64,22 @@ import { GitHubCallback } from '@blog-app/react-github-oauth';
 
 ### GitHubOAuthConfig
 
-| 参数 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| clientId | string | 是 | GitHub OAuth App的客户端ID |
-| clientSecret | string | 是 | GitHub OAuth App的客户端密钥 |
-| redirectUrl | string | 是 | 认证回调地址 |
-| apiBaseUrl | string | 是 | 后端API地址 |
-| authUrl | string | 否 | GitHub认证URL，默认为官方地址 |
-| callbackPath | string | 否 | 后端回调接口路径 |
-| scope | string | 否 | OAuth权限范围 |
+#### 基本配置（必填）
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| clientId | string | GitHub OAuth App的客户端ID，可在GitHub开发者设置中找到 |
+| clientSecret | string | GitHub OAuth App的客户端密钥 |
+| redirectUrl | string | GitHub登录成功后跳转回前端的URL（需要在GitHub应用设置中添加） |
+| apiBaseUrl | string | 后端API地址，前端会请求此地址交换token |
+
+#### 可选配置
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| authUrl | string | https://github.com/login/oauth/authorize | GitHub的授权URL，通常不用改，除非GitHub API发生变更 |
+| callbackPath | string | /api/auth/github/callback | 自定义后端回调路径，例如完整URL会是：http://localhost:3000/api/auth/github/callback |
+| scope | string | user:email | GitHub授权范围，常用值：<br>- `user:email`：读取用户邮箱<br>- `read:user`：读取用户信息<br>- `repo`：访问私有仓库<br>- `read:org`：组织信息 |
 
 ### GitHubLoginButton Props
 
