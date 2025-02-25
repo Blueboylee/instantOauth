@@ -5,10 +5,10 @@
 ## 安装
 
 ```bash
-npm install react-github-oauth
+npm install instant-oauthfront
 
 # 或者使用yarn
-yarn add react-github-oauth
+yarn add instant-oauthfront
 ```
 
 ## 使用方法
@@ -16,7 +16,7 @@ yarn add react-github-oauth
 1. 在应用根组件中配置GitHubOAuthProvider：
 
 ```jsx
-import { GitHubOAuthProvider } from 'react-github-oauth';
+import { GitHubOAuthProvider } from ' instant-oauthfront';
 
 const githubOAuthConfig = {
   clientId: 'your-github-client-id',
@@ -40,7 +40,7 @@ function App() {
 2. 在需要GitHub登录的组件中使用GitHubLoginButton：
 
 ```jsx
-import { GitHubLoginButton } from 'react-github-oauth';
+import { GitHubLoginButton } from 'instant-oauthfront';
 
 function LoginPage() {
   return (
@@ -54,7 +54,7 @@ function LoginPage() {
 3. 添加回调页面组件：
 
 ```jsx
-import { GitHubCallback } from 'react-github-oauth';
+import { GitHubCallback } from 'instant-oauthfront';
 
 // 在路由中添加
 <Route path="/github/callback" element={<GitHubCallback />} />
