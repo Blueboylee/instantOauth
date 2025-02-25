@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { OAuth } from '.';
+export { OAuth };
 
 export function createOAuthRouter(provider: 'github', options: {
   clientId: string;
